@@ -3,6 +3,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+
 int main(int argc, char *argv[]){
     size_t n = 32; // Buffer size
     char buf[n];
@@ -21,7 +22,5 @@ int main(int argc, char *argv[]){
         r = read(readFileDescriptor, buf, n);
         w = write(fileDescriptor, buf, n);
     }
-
-
     return 0;
 }
