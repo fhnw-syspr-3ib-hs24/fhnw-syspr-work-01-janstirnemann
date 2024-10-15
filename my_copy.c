@@ -11,16 +11,18 @@ int main(int argc, char *argv[]){
     int readFileDescriptor = open(argv[1], O_RDONLY);
 
     //write
-    int fileDescriptor = open(argv[2], O_WRONLY| O_CREAT | O_TRUNC | O_APPEND, S_IRUSR | S_IWUSR);
+    int fileDescriptor = open(argv[2], O_CREAT | O_WRONLY| O_TRUNC | O_APPEND, S_IRUSR | S_IWUSR);
 
 
-    ssize_t r = read(readFileDescriptor, buf, 32);
-    ssize_t w = write(fileDescriptor, buf, r);
+    ssize_t r = read(readFileDescriptor, buf, n);
+    //ssize_t w = write(fileDescriptor, buf, r);
     // read the whole text with buffer
     while ( r > 0){
         //write(STDOUT_FILENO, buf, r);
+       ssize_t w = write(fileDescriptor, buf, r);
         r = read(readFileDescriptor, buf, n);
-        w = write(fileDescriptor, buf, n);
     }
+    close(readFileDescriptor);
+    close(fileDescriptor);
     return 0;
 }
